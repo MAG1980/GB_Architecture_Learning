@@ -1,5 +1,5 @@
 {
-    "name": "Online shop",
+    "name": "online_shop/arc",
     "description": "Homework project for Web Architecture course. Licensed by the Geekbrains",
     "autoload": {
         "psr-4": {
