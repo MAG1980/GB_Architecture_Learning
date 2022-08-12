@@ -4,7 +4,10 @@ const DEFAULT_USER_NAME = 'John';
 const MINIMAL_USER_AGE = 18;
 const MAXIMAL_USER_AGE = 80;
 
-
+//Устранил проблему нарушения принципа инверсии зависимостей
+interface IUserRepository{
+    public function printAge(string $name, float $age):void;
+}
 
 class User
 {
@@ -13,10 +16,11 @@ class User
     protected $age = DEFAULT_USER_AGE;
     public $repository;
 
-    public function __construct()
+    //Устранил проблему нарушения принципа инверсии зависимостей
+    public function __construct(IUserRepository $userRepository)
     {
         //Нарушение DIP (SOLID)
-        $this->repository = new UserRepository();
+        $this->repository = $userRepository;
     }
 
     public function getName()
@@ -45,11 +49,11 @@ class User
     }
 }
 
-class UserRepository
+class UserRepository implements IUserRepository
 {
 
     //Устранил антипаттерн Cryptic Code
-    public  function printAge($name, $age)
+    public  function printAge(string $name, float $age):void
     {
         echo "Возраст студента по имени ".$name." - ".$age.".\n";
     }
