@@ -11,6 +11,13 @@ class User
     //Избавился от антипаттерна Privatization
     protected $name = DEFAULT_USER_NAME;
     protected $age = DEFAULT_USER_AGE;
+    public $repository;
+
+    public function __construct()
+    {
+        //Нарушение DIP (SOLID)
+        $this->repository = new UserRepository();
+    }
 
     public function getName()
     {
@@ -20,6 +27,7 @@ class User
     public function setName($name)
     {
         $this->name = $name;
+        $this->repository->name = $name;
     }
 
     public function getAge()
@@ -32,12 +40,18 @@ class User
         //Антипаттерн Magic Numbers устрнанён
         if ($age >= MINIMAL_USER_AGE) {
             $this->age = $age;
+            $this->repository->age = $age;
         }
     }
+}
+
+class UserRepository
+{
 
     //Устранил антипаттерн Cryptic Code
-    public function printAge (){
-        echo "Возраст студента по имени " . $this->getName() . " - " .  $this->getAge() . ".\n";
+    public  function printAge($name, $age)
+    {
+        echo "Возраст студента по имени ".$name." - ".$age.".\n";
     }
 }
 
