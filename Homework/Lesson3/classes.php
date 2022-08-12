@@ -2,12 +2,13 @@
 const DEFAULT_USER_AGE = 76;
 const DEFAULT_USER_NAME = 'John';
 const MINIMAL_USER_AGE = 18;
+const MAXIMAL_USER_AGE = 80;
 
 class User
 {
-    //Антипаттерн Privatization
-    private $name = DEFAULT_USER_NAME;
-    private $age = DEFAULT_USER_AGE;
+    //Избавился от антипаттерна Privatization
+    protected $name = DEFAULT_USER_NAME;
+    protected $age = DEFAULT_USER_AGE;
 
     public function getName()
     {
@@ -26,7 +27,7 @@ class User
 
     public function setAge($age)
     {
-        //Антипаттерн Magic Numbers
+        //Антипаттерн Magic Numbers устрнанён
         if ($age >= MINIMAL_USER_AGE) {
             $this->age = $age;
         }
@@ -49,6 +50,13 @@ class Student extends User
 
     public function setName($name)
     {
-        $this->name = $name;
+        $this->name = strtoupper($name);
+    }
+    public function setAge($age)
+    {
+        //Антипаттерн Magic Numbers устрнанён
+        if ($age >= MINIMAL_USER_AGE && $age<=MAXIMAL_USER_AGE) {
+            $this->age = $age;
+        }
     }
 }

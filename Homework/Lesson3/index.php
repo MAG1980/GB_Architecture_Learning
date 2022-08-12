@@ -8,7 +8,7 @@ echo "Возраст студента по имени " . $student->getName() . 
 $student->setAge(24);    // поменяем возраст студента на другой, но корректный возраст
 echo "Возраст студента по имени " . $student->getName() . " - " .  $student->getAge() . ".\n"; // выведет 24 - возраст поменялся
 
-$student->setAge(3);    // укажем некорректный возраст
+$student->setAge(89);    // укажем некорректный возраст
 echo "Возраст студента по имени " . $student->getName() . " - " .  $student->getAge() . ".\n";
 
 $student->setName("Vladimir");
