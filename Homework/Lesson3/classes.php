@@ -4,6 +4,8 @@ const DEFAULT_USER_NAME = 'John';
 const MINIMAL_USER_AGE = 18;
 const MAXIMAL_USER_AGE = 80;
 
+
+
 class User
 {
     //Избавился от антипаттерна Privatization
@@ -33,8 +35,8 @@ class User
         }
     }
 
-    //Антипаттерн Cryptic Code (по названию метода невозможно до конца понять его назначение)
-    public function print (){
+    //Устранил антипаттерн Cryptic Code
+    public function printAge (){
         echo "Возраст студента по имени " . $this->getName() . " - " .  $this->getAge() . ".\n";
     }
 }
