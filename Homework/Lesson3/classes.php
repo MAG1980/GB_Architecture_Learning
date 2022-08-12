@@ -1,8 +1,11 @@
 <?php
-include "config.php";
+const DEFAULT_USER_AGE = 76;
+const DEFAULT_USER_NAME = 'John';
+const MINIMAL_USER_AGE = 18;
 
 class User
 {
+    //Антипаттерн Privatization
     private $name = DEFAULT_USER_NAME;
     private $age = DEFAULT_USER_AGE;
 
@@ -42,5 +45,10 @@ class Student extends User
     public function setCourse($course)
     {
         $this->course = $course;
+    }
+
+    public function setName($name)
+    {
+        $this->name = $name;
     }
 }
