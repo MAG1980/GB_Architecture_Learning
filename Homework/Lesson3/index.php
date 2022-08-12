@@ -1,7 +1,8 @@
 <?php
 require_once "classes.php";
 
-$student = new Student;
+//Устранил проблему нарушения принципа инверсии зависимостей
+$student = new Student(new UserRepository);
 
 print_r($student->repository);
 $student->repository->printAge($student->getName(), $student->getAge());
