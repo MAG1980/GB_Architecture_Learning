@@ -32,6 +32,11 @@ class User
             $this->age = $age;
         }
     }
+
+    //Антипаттерн Cryptic Code (по названию метода невозможно до конца понять его назначение)
+    public function print (){
+        echo "Возраст студента по имени " . $this->getName() . " - " .  $this->getAge() . ".\n";
+    }
 }
 
 class Student extends User
