@@ -1,8 +1,10 @@
 <?php
+include "config.php";
+
 class User
 {
-    private $name = "John";
-    private $age = 76;
+    private $name = DEFAULT_USER_NAME;
+    private $age = DEFAULT_USER_AGE;
 
     public function getName()
     {
@@ -22,7 +24,7 @@ class User
     public function setAge($age)
     {
         //Антипаттерн Magic Numbers
-        if ($age >= 18) {
+        if ($age >= MINIMAL_USER_AGE) {
             $this->age = $age;
         }
     }
