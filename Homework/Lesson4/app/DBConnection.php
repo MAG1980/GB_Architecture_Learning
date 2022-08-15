@@ -1,8 +1,8 @@
 <?php
 interface IDBConnection{
-
+    function getStorage(): Storage;
 }
-class DBConnection implements IDBConnection
+abstract class DBConnection implements IDBConnection
 {
-
+   abstract function getStorage(): Storage;
 }

@@ -5,16 +5,16 @@ class PostgreSQLFactory implements IDBFactory
 
     public function getConnection(): IDBConnection
     {
-        // TODO: Implement getConnection() method.
+        return new PostgreSQLStorage();
     }
 
     public function getQuery(): IDBQueryBuilder
     {
-        // TODO: Implement getQuery() method.
+        return new PostgreSQLQueryBuilder();
     }
 
     public function getRecord(): IDBRecord
     {
-        // TODO: Implement getRecord() method.
+        return new PostgreSQLRecord();
     }
 }

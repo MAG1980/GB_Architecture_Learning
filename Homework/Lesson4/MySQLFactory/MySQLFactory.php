@@ -5,16 +5,16 @@ class MySQLFactory implements IDBFactory
 
     public function getConnection(): IDBConnection
     {
-        // TODO: Implement getConnection() method.
+        return new MySQLStorage();
     }
 
     public function getQuery(): IDBQueryBuilder
     {
-        // TODO: Implement getQuery() method.
+        return new MySQLQueryBuilder();
     }
 
     public function getRecord(): IDBRecord
     {
-        // TODO: Implement getRecord() method.
+        return new MySQLRecord();
     }
 }
