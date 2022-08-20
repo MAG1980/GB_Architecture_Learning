@@ -2,5 +2,5 @@
 
 interface ISquare
 {
-    function squareArea(int $sideSquare);
+    function squareArea(float $sideSquare);
 }

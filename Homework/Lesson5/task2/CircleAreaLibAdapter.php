@@ -12,10 +12,9 @@ class CircleAreaLibAdapter implements ICircle
         $this->circleAreaLib = $circleAreaLib;
     }
 
-    function circleArea(int $circumference)
+    function circleArea(float $circumference)
     {
         $diagonal = $circumference / M_PI;
-        echo $diagonal."\n";
         return $this->circleAreaLib->getCircleArea($diagonal);
     }
 }

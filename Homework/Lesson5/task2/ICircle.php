@@ -2,5 +2,5 @@
 
 interface ICircle
 {
-    function circleArea(int $circumference);
+    function circleArea(float $circumference);
 }
