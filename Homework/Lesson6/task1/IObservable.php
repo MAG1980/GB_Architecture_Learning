@@ -3,6 +3,6 @@
 interface IObservable
 {
     public function attach(IObserver $observe);
-    public function detach(IObserver $observer);
+    public function detach(int $id);
     public function notify(string $message);
 }
