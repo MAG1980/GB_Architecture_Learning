@@ -14,6 +14,7 @@ use Service\Discount\NullObject;
 use Service\User\ISecurity;
 use Service\User\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Model\Repository\IdentityMap;
 
 class Basket
 {
@@ -131,7 +132,7 @@ class Basket
      */
     protected function getProductRepository(): Model\Repository\Product
     {
-        return new Model\Repository\Product();
+        return new Model\Repository\Product(new IdentityMap());
     }
 
     /**
