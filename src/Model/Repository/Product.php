@@ -8,10 +8,21 @@ use Model\Entity;
 
 class Product
 {
+    //Ссылка на глобальное хранилище сущностей
+    private IdentityMap $identityMap;
+
+    /**
+     * @param  IdentityMap  $identityMap  - глобальное хранилище сущностей
+     */
+    public function __construct(IdentityMap $identityMap)
+    {
+        $this->identityMap = $identityMap;
+    }
+
     /**
      * Поиск продуктов по массиву id
      *
-     * @param int[] $ids
+     * @param  int[]  $ids
      * @return Entity\Product[]
      */
     public function search(array $ids = []): array
@@ -21,15 +32,30 @@ class Product
         }
 
         $productList = [];
-        foreach ($this->getDataFromSource(['id' => $ids]) as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+
+        //Перебираем массив id, чтобы вернуть соответствующие им сущности
+        foreach ($ids as $id) {
+            try {
+                //Пытаемся получить нужный объект из глобального хранилища
+                $productList[] = $this->identityMap->get("Product", $id);
+            } catch (EmptyCacheException $e) {
+                //Возвращаем из источника данных (БД) информацию о Product
+                $item = $this->getDataFromSource(['id' => $id]);
+
+                //Порождаем объект Product и добавляем его во временный массив
+                $newProduct=new Entity\Product($item['id'], $item['name'], $item['price']);
+                $productList[] = $newProduct;
+
+                //Добавляем порождённый объект Product в глобальное хранилище
+                $this->identityMap->add($newProduct);
+            }
         }
 
         return $productList;
     }
 
     /**
-     * Получаем все продукты
+     * Получаем все продукты и добавляем их в глобальное хранилище
      *
      * @return Entity\Product[]
      */
@@ -37,7 +63,9 @@ class Product
     {
         $productList = [];
         foreach ($this->getDataFromSource() as $item) {
-            $productList[] = new Entity\Product($item['id'], $item['name'], $item['price']);
+            $newProduct=new Entity\Product($item['id'], $item['name'], $item['price']);
+            $productList[] = $newProduct;
+            $this->identityMap->add($newProduct);
         }
 
         return $productList;
