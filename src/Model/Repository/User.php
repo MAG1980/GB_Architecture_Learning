@@ -8,19 +8,15 @@ use Model\Entity;
 
 class User
 {
-    //Хранилище сущностей
+    //Ссылка на глобальное хранилище сущностей
     private IdentityMap $identityMap;
 
-
-    /**Инициализация хранилища IdentityMap
-     * @param  IdentityMap  $identityMap
-     * @return void
+    /**
+     * @param  IdentityMap  $identityMap  - глобальное хранилище сущностей
      */
-    private function initializeIdentityMap(IdentityMap $identityMap): void
+    public function __construct(IdentityMap $identityMap)
     {
-        if (!isset($this->identityMap)) {
-            $this->identityMap = $identityMap;
-        }
+        $this->identityMap = $identityMap;
     }
 
     /**
@@ -31,8 +27,7 @@ class User
      */
     public function getById(int $id): ?Entity\User
     {
-        $this->initializeIdentityMap(new IdentityMap());
-
+        //Пытаемся получить пользователя из глобального хранилища сущностей по id
         try {
             return $this->identityMap->get("User", $id);
         } catch (EmptyCacheException $e) {
@@ -53,8 +48,7 @@ class User
      */
     public function getByLogin(string $login): ?Entity\User
     {
-        $this->initializeIdentityMap(new IdentityMap());
-
+        //Пытаемся получить пользователя из глобального хранилища сущностей по login
         try {
             return $this->identityMap->get("User", $login);
         } catch (EmptyCacheException $e) {
