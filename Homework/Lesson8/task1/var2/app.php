@@ -21,4 +21,4 @@ function iterate($iterator)
     }
 }
 
-explorer("/home/alexey/PhpstormProjects/GB_Architecture_Learning/Homework/");
+explorer(__DIR__);

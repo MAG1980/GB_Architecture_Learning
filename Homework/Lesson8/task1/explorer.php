@@ -14,15 +14,15 @@
         if ($item->isDir()) {
 
             $dirName=$iterator->getBaseName();
-            echo 'Название каталога: '. $divider . $dirName . "\n";
+            echo  $divider . $dirName . "\n";
 
             $dirPath=$iterator->getPathname();
             explorer($dirPath, $divider);
         } else {
-            echo 'Имя файла: ' . $divider . $iterator->getBaseName() . "\n";
+            echo  $divider . $iterator->getBaseName() . "\n";
 //            echo 'Путь к файлу: ' . $iterator->key() . "\n\n";
         }
     }
 };
 
-explorer("/home/alexey/PhpstormProjects/GB_Architecture_Learning/Homework/",'');
+explorer(__DIR__,'');
