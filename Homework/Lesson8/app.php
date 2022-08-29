@@ -1,17 +1,24 @@
 <?php
-// Создаем новый объект DirectoryIterator
-//$dir = new DirectoryIterator("/my/directory/path");
-//$dir = new DirectoryIterator(" /home/alexey/PhpstormProjects/GB_Architecture_Learning/Homework/Lesson8/");
-$dir = new DirectoryIterator(__DIR__);
-// Цикл по содержанию директории
-/*foreach ($dir as $item) {
-    echo $item . "<br>";
-}*/
-$n = 100;
-$array[] = [];
-for ($i = 0; $i < $n; $i++) {
-    for ($j = 1; $j < $n; $j *= 2) {
-        $array[$i][$j] = true;
 
+function explorer($path)
+{
+    $directoryIterator = new RecursiveDirectoryIterator($path, FilesystemIterator::SKIP_DOTS);
+    $iterator = new RecursiveIteratorIterator($directoryIterator, RecursiveIteratorIterator::SELF_FIRST);
+
+    iterate($iterator);
+}
+
+function iterate($iterator)
+{
+    foreach ($iterator as $item) {
+        if ($item->isDir()) {
+            echo 'Название каталога: ' . $iterator->getBaseName() . "\n";
+            echo 'Путь к каталогу: ' . $iterator->key() . "\n\n";
+        } else {
+            echo 'Имя файла: ' . $iterator->getBaseName() . "\n";
+            echo 'Путь к файлу: ' . $iterator->key() . "\n\n";
+        }
     }
 }
+
+explorer("/home/alexey/PhpstormProjects/GB_Architecture_Learning/Homework/");
