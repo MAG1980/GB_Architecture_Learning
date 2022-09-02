@@ -1,5 +1,4 @@
 <?php
-
 //Проверяет число на натуральность
 function isPrime($number): bool
 {
