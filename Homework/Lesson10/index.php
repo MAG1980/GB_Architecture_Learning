@@ -140,3 +140,30 @@ var_dump($binaryTree->root);
 //$binaryTree->getNodeList();
 //$binaryTree->getNodeArray();
 var_dump($binaryTree->getNodeArray());
+
+$mathOperations = [
+    "+" => 3, "-" => 3, "*" => 2, "/" => 2, "^" => 1
+];
+
+$str = 'some + text - new';
+$str = '236 + 1 - 32/ 678';
+$lecArr = [];
+$offset = -1;
+for ($i = 0; $i <= strlen($str); $i++) {
+
+    if (array_key_exists($str[$i], $mathOperations)) {
+        $subStrLength = $i - 1 - $offset;
+        $lec = trim(substr($str, $offset + 1, $subStrLength));
+        var_dump("i: $i", "offset: $offset");
+        var_dump($lec);
+        $lecArr[] = $lec;
+        $offset = $i;
+        $lecArr[] = $str[$i];
+        $lengthToEnd = strlen($str) - $i - 1;
+    }
+    if ($i === strlen($str)) {
+        $lec = trim(substr($str, -$lengthToEnd));
+        $lecArr[] = $lec;
+    }
+}
+print_r($lecArr);
