@@ -73,7 +73,7 @@ class BinaryTree
         $this->array[] = $node->value;
     }
 
-    private function inOrder( $node, $dataHadler)
+    private function inOrder($node, $dataHadler)
     {
         if (is_null($node)) {
             return;
@@ -82,8 +82,12 @@ class BinaryTree
         $dataHadler($node->value);
         $this->inOrder($node->rightTree, $dataHadler);
     }
-    public function getElem($elem, $function){
-        return $function($elem);
+
+    public function getNodeList()
+    {
+        $this->fromLeftToRight((function ($value) {
+            var_dump($value);
+        }));
     }
 }
 
@@ -100,6 +104,7 @@ $binaryTree->addNode(15);
 
 
 var_dump($binaryTree->node);
-$binaryTree->fromLeftToRight(function ($value){
+/*$binaryTree->fromLeftToRight(function ($value) {
     var_dump($value);
-});
+});*/
+$binaryTree->getNodeList();
