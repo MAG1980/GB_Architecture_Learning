@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Service\Product;
 
 use Model;
+use  Model\Repository\IdentityMap;
 
 class Product
 {
@@ -45,6 +46,6 @@ class Product
      */
     protected function getProductRepository(): Model\Repository\Product
     {
-        return new Model\Repository\Product();
+        return new Model\Repository\Product(new IdentityMap());
     }
 }

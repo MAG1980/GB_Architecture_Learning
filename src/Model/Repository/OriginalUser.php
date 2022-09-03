@@ -1,6 +1,6 @@
 <?php
 
-declare(strict_types=1);
+declare(strict_types = 1);
 
 namespace Model\Repository;
 
@@ -8,57 +8,34 @@ use Model\Entity;
 
 class User
 {
-    //Ссылка на глобальное хранилище сущностей
-    private IdentityMap $identityMap;
-
-    /**
-     * @param  IdentityMap  $identityMap  - глобальное хранилище сущностей
-     */
-    public function __construct(IdentityMap $identityMap)
-    {
-        $this->identityMap = $identityMap;
-    }
 
     /**
      * Получаем пользователя по идентификатору
      *
-     * @param  int  $id
+     * @param int $id
      * @return Entity\User|null
      */
     public function getById(int $id): ?Entity\User
     {
-        //Пытаемся получить пользователя из глобального хранилища сущностей по id
-        try {
-            return $this->identityMap->get("User", $id);
-        } catch (EmptyCacheException $e) {
-            foreach ($this->getDataFromSource(['id' => $id]) as $user) {
-                $userObject = $this->createUser($user);
-                $this->identityMap->add($userObject);
-                return $userObject;
-            }
+        foreach ($this->getDataFromSource(['id' => $id]) as $user) {
+
+            return $this->createUser($user);
         }
+
         return null;
     }
 
     /**
      * Получаем пользователя по логину
      *
-     * @param  string  $login
+     * @param string $login
      * @return Entity\User
      */
     public function getByLogin(string $login): ?Entity\User
     {
-        //Пытаемся получить пользователя из глобального хранилища сущностей по login
-        try {
-            return $this->identityMap->get("User", $login);
-        } catch (EmptyCacheException $e) {
-            foreach ($this->getDataFromSource(['login' => $login]) as $user) {
-
-                if ($user['login'] === $login) {
-                    $userObject = $this->createUser($user);
-                    $this->identityMap->add($userObject);
-                    return $userObject;
-                }
+        foreach ($this->getDataFromSource(['login' => $login]) as $user) {
+            if ($user['login'] === $login) {
+                return $this->createUser($user);
             }
         }
 
@@ -68,7 +45,7 @@ class User
     /**
      * Фабрика по созданию сущности пользователя
      *
-     * @param  array  $user
+     * @param array $user
      * @return Entity\User
      */
     private function createUser(array $user): Entity\User
@@ -87,7 +64,7 @@ class User
     /**
      * Получаем пользователей из источника данных
      *
-     * @param  array  $search
+     * @param array $search
      *
      * @return array
      */

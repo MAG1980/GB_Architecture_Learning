@@ -5,6 +5,7 @@ declare(strict_types = 1);
 namespace Service\User;
 
 use Model;
+use Model\Repository\IdentityMap;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class Security implements ISecurity
@@ -28,7 +29,7 @@ class Security implements ISecurity
     {
         $userId = $this->session->get(self::SESSION_USER_IDENTITY);
 
-        return $userId ? (new Model\Repository\User())->getById($userId) : null;
+        return $userId ? (new Model\Repository\User(new IdentityMap()))->getById($userId) : null;
     }
 
     /**
@@ -78,6 +79,6 @@ class Security implements ISecurity
      */
     protected function getUserRepository(): Model\Repository\User
     {
-        return new Model\Repository\User();
+        return new Model\Repository\User(new IdentityMap());
     }
 }
