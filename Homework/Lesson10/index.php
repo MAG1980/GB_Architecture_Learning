@@ -89,6 +89,17 @@ class BinaryTree
             var_dump($value);
         }));
     }
+
+    public function getNodeArray()
+    {
+        $this->array=[];
+        //Выполняем обход дерева и добавляем значения его узлов в массив в порядке возрастания
+        $this->fromLeftToRight((function ($value) {
+            $this->array[] = $value;
+        }));
+
+        return $this->array;
+    }
 }
 
 
@@ -107,4 +118,6 @@ var_dump($binaryTree->node);
 /*$binaryTree->fromLeftToRight(function ($value) {
     var_dump($value);
 });*/
-$binaryTree->getNodeList();
+//$binaryTree->getNodeList();
+//$binaryTree->getNodeArray();
+var_dump($binaryTree->getNodeArray());
